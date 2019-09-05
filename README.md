@@ -3,7 +3,10 @@ A demo setup of Elasticsearch (ES) on Openshift
 
 After struggling for quite some time getting ES to run smoothly on Openshift here is a working setup.
 
-It consist of three parts: The Openshift configuration, a small Java program indexing generated data and an Angular WebFrontend with a search-as-you-type input field. 
+It consist of three parts: 
+* the Openshift configuration
+* a small Java program indexing generated random data 
+* an Angular WebFrontend with a search-as-you-type input field. 
 
 ## Reasons for our troubles in the past:
 
