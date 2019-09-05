@@ -14,4 +14,4 @@ It consist of three parts:
 * NSF4 Storage instead of now OpenStack Cinder
 * Using a Minishift Image (oops) ignoring memory settings and using only 512 MB 
 * Using supervisord to run a NewRelic service parallel prevents seeing ES restarts caused by OOM kills
-* Incorrect interpretation of Openshifts' resources setting ‘requests’ and ‘limit’
+* Incorrect interpretation of Openshifts' resource setting ‘requests’ and ‘limit’
