@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: es-cluster
+spec:
+  serviceName: elasticsearch
+  replicas: 3
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - name: elasticsearch
+        image: docker.bin.sbb.ch/elasticsearch:7.3.0
+        resources:
+            limits:
+              cpu: 2
+              memory: 10Gi
+            requests:
+              cpu: 2
+              memory: 10Gi
+        ports:
+        - containerPort: 9200
+          name: rest
+          protocol: TCP
+        - containerPort: 9300
+          name: inter-node
+          protocol: TCP
+        volumeMounts:
+        - name: elasticsearch-volume
+          mountPath: /usr/share/elasticsearch/data
+        env:
+          - name: cluster.name
+            value: demo
+          - name: node.name
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: discovery.zen.ping.unicast.hosts
+            value: "es-cluster-0.elasticsearch,es-cluster-1.elasticsearch,es-cluster-2.elasticsearch"
+          - name: discovery.zen.minimum_master_nodes
+            value: "1"
+          - name: cluster.initial_master_nodes
+            value: "es-cluster-0"
+          - name: ES_JAVA_OPTS
+            value: "-Xms8g -Xmx8g"
+  volumeClaimTemplates:
+  - metadata:
+      name: elasticsearch-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 500Gi
+      storageClassName: otc-ssd
+      
