@@ -15,3 +15,28 @@ It consist of three parts:
 * Using a Minishift Image (oops) ignoring memory settings and using only 512 MB 
 * Using supervisord to run a NewRelic service parallel prevents seeing ES restarts caused by OOM kills
 * Incorrect interpretation of Openshifts resource setting ‘requests’ and ‘limit’
+
+## Openshift Config Files
+
+### service.yaml
+Use headless mode:
+```
+clusterIP: none  
+```
+
+### statefulset.yaml
+It is quite important to use a statefulset.
+
+The value of
+```
+discovery.zen.ping.unicast.hosts
+```
+is a list of elasticsearch node names. TODO: is there a better way?
+
+Without setting the 
+```
+cluster.initial_master_nodes
+```
+the eligible master nodes choose no elected master node. TODO: ist this correct. Until now I have nowhere found this hint
+
+
