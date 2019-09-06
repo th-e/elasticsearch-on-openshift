@@ -19,10 +19,10 @@ spec:
         resources:
             limits:
               cpu: 2
-              memory: 10Gi
+              memory: 16Gi
             requests:
               cpu: 2
-              memory: 10Gi
+              memory: 16Gi
         ports:
         - containerPort: 9200
           name: rest
@@ -57,4 +57,3 @@ spec:
         requests:
           storage: 500Gi
       storageClassName: otc-ssd
-      

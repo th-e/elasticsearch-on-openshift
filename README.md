@@ -37,6 +37,24 @@ Without setting the
 ```
 cluster.initial_master_nodes
 ```
-the eligible master nodes choose no elected master node. TODO: ist this correct. Until now I have nowhere found this hint
+value the eligible master nodes do not choose any elected master node. TODO: is this correct? Till now nowhere elsee found any hint on this.
+
+We use a template
+```
+volumeClaimTemplates
+```
+specifiying hwo to create dynamically new volumes. The `storageClassName` is specific according to our openshift setup.
+
+```
+ES_JAVA_OPTS
+```
+should be always below 32GB. First best guess is to have 1/16th of the storage size. Add shards if you reach the 32 GB limit.
+
+
+```
+containers.resources
+```
+The `request` must be above the `ES_JAVA_OPTS`. Elasticsearch needs for caching a sufficient amount of unused RAM. 
+To achieve this on Openshift use a high value for `containers.resources.request` (TODO: verify). 
 
 
