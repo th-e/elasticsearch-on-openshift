@@ -1,5 +1,6 @@
 package de.webtuples;
 
+import de.webtuples.data.TicketGenerator;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.bulk.*;
 import org.elasticsearch.action.index.IndexRequest;
@@ -78,7 +79,7 @@ public class Indexer {
                     .setBackoffPolicy(BackoffPolicy.constantBackoff(TimeValue.timeValueSeconds(1L), 3))
                     .build();
 
-            for (int i = 0; i < 10000000; i++) {
+            for (int i = 0; i < 1000*1000*500; i++) {
                 IndexRequest indexRequest = new IndexRequest(INDEX_NAME)
                         .id(String.valueOf(i))
                         .source(TicketGenerator.getRandomTicket());

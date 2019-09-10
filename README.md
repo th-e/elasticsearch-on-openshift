@@ -55,6 +55,32 @@ should be always below 32GB. First best guess is to have 1/16th of the storage s
 containers.resources
 ```
 The `request` must be above the `ES_JAVA_OPTS`. Elasticsearch needs for caching a sufficient amount of unused RAM. 
-To achieve this on Openshift use a high value for `containers.resources.request` (TODO: verify). 
+To achieve this on Openshift use a high value for `containers.resources.request` (TODO: verify).
+
+Example for a generated ticket:
+```json
+{
+  "pointOfSale": "47",
+  "time": "1970-01-01T07:49:16.923Z",
+  "productInfo": {
+    "id": "136",
+    "from": "Hamburg",
+    "to": "Milano"
+  },
+  "utilizationTime": {
+    "from": "2019-09-19",
+    "to": "2019-09-26"
+  },
+  "travelerInfo": {
+    "lastname": "Plate",
+    "firstname": "Abdu",
+    "dateOfBirth": "1993-01-25"
+  },
+  "price": {
+    "value": "09.4",
+    "currency": "CHF"
+  }
+}
+``` 
 
 
